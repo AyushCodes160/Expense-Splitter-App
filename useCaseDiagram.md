@@ -1,39 +1,48 @@
 # Expense Splitter App - Use Case Diagram
 
 ```mermaid
-usecaseDiagram
-    actor "User" as U
-    actor "Admin" as A
+graph LR
+    %% Actors
+    U((User))
+    A((Admin))
 
-    package "Full Stack Application" {
-        usecase "Register/Login" as UC1
+    %% System Boundary
+    subgraph System["Full Stack Application"]
+        direction TB
         
-        package "User Management" {
-            usecase "View Profile" as UC2
-            usecase "View Expense History" as UC3
-            usecase "Manage Friends" as UC4
-        }
-
-        package "Group Management" {
-            usecase "Create Group" as UC5
-            usecase "Add Member to Group" as UC6
-            usecase "View Group Summary" as UC7
-        }
-
-        package "Expense Management" {
-            usecase "Add Expense" as UC8
-            usecase "Split Expense (Equal/Unequal/%)" as UC9
-            usecase "Settle Balance" as UC10
-            usecase "View Dashboard" as UC11
-        }
+        UC1(Register/Login)
         
-        package "Admin Features" {
-            usecase "View All Users" as UC12
-            usecase "View All Groups" as UC13
-            usecase "Monitor System" as UC14
-        }
-    }
+        subgraph UserMgmt["User Management"]
+            UC2(View Profile)
+            UC3(View Expense History)
+            UC4(Manage Friends)
+        end
 
+        subgraph GroupMgmt["Group Management"]
+            UC5(Create Group)
+            UC6(Add Member to Group)
+            UC7(View Group Summary)
+        end
+
+        subgraph ExpenseMgmt["Expense Management"]
+            UC8(Add Expense)
+            UC9(Split Expense - Equal/Unequal/%)
+            UC10(Settle Balance)
+            UC11(View Dashboard)
+        end
+        
+        subgraph AdminFeatures["Admin Features"]
+            UC12(View All Users)
+            UC13(View All Groups)
+            UC14(Monitor System)
+        end
+    end
+
+    %% Styles
+    style U fill:#f9f,stroke:#333,stroke-width:2px
+    style A fill:#f9f,stroke:#333,stroke-width:2px
+
+    %% Relationships
     U --> UC1
     U --> UC2
     U --> UC3
@@ -45,7 +54,8 @@ usecaseDiagram
     U --> UC10
     U --> UC11
 
-    UC8 ..> UC9 : <<include>>
+    %% Include relationship (dashed)
+    UC8 -.-> UC9
 
     A --> UC1
     A --> UC12
