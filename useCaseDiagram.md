@@ -1,7 +1,7 @@
 # Expense Splitter App - Use Case Diagram
 
 ```mermaid
-useCaseDiagram
+usecaseDiagram
     actor "User" as U
     actor "Admin" as A
 
