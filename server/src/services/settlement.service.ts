@@ -66,4 +66,28 @@ export class SettlementService {
       }
     });
   }
+
+  static async getMyTotals(userId: string) {
+    const userGroups = await prisma.userGroup.findMany({
+      where: { userId },
+      select: { groupId: true }
+    });
+
+    let youOwe = 0;
+    let youAreOwed = 0;
+
+    for (const { groupId } of userGroups) {
+      const balances = await this.getGroupBalances(groupId);
+      const myBalance = balances.find(b => b.user_id === userId);
+      if (myBalance) {
+        if (myBalance.net > 0) youAreOwed += myBalance.net;
+        else if (myBalance.net < 0) youOwe += Math.abs(myBalance.net);
+      }
+    }
+
+    return {
+      youOwe: Math.round(youOwe * 100) / 100,
+      youAreOwed: Math.round(youAreOwed * 100) / 100
+    };
+  }
 }
