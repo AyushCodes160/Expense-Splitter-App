@@ -55,4 +55,15 @@ export class ExpenseService {
       orderBy: { date: 'desc' }
     });
   }
+
+  static async deleteExpense(userId: string, expenseId: string) {
+    const expense = await prisma.expense.findUnique({ where: { id: expenseId } });
+    if (!expense) throw new Error("Expense not found");
+    if (expense.paidBy !== userId) throw new Error("Only the creator can delete this expense");
+
+    // Because of foreign keys, we delete the splits first (or let Prisma cascade if configured, but explicit is safer)
+    await prisma.expenseSplit.deleteMany({ where: { expenseId } });
+    await prisma.expense.delete({ where: { id: expenseId } });
+    return true;
+  }
 }

@@ -11,3 +11,12 @@ export const getGroupExpenses = async (req: AuthRequest, res: Response) => {
   const expenses = await ExpenseService.getGroupExpenses(req.params.groupId as string);
   res.json(expenses);
 };
+
+export const deleteExpense = async (req: AuthRequest, res: Response) => {
+  try {
+    await ExpenseService.deleteExpense(req.user!.userId, req.params.id as string);
+    res.json({ success: true });
+  } catch (error: any) {
+    res.status(403).json({ error: error.message });
+  }
+};
