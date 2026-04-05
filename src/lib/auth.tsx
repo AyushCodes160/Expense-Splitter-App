@@ -2,6 +2,20 @@ import { createContext, useContext, useEffect, useState, type ReactNode } from "
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 
+// Interceptor to handle global 401 Unauthorized errors (e.g. expired tokens)
+axios.interceptors.response.use(
+  (response) => response,
+  (error) => {
+    if (error.response && error.response.status === 401) {
+      localStorage.removeItem("authToken");
+      if (window.location.pathname !== '/login' && window.location.pathname !== '/register') {
+        window.location.href = '/login';
+      }
+    }
+    return Promise.reject(error);
+  }
+);
+
 export interface User {
   id: string;
   username: string;

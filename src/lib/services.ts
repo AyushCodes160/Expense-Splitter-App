@@ -68,8 +68,8 @@ export const ProfileService = {
   },
 
   async update(updates: Partial<Profile>) {
-    // Left unimplemented for now
-    throw new Error("Not implemented yet");
+    const res = await axios.put("/api/users/me", updates);
+    return res.data;
   },
 
   async findByUsername(username: string) {
@@ -154,7 +154,8 @@ export const ExpenseService = {
   },
 
   async delete(expenseId: string) {
-    throw new Error("Not implemented");
+    const res = await axios.delete(`/api/expenses/${expenseId}`);
+    return res.data;
   },
 };
 
@@ -170,8 +171,8 @@ export const BalanceService = {
   },
 
   async getMyTotals() {
-    // Simplified for now
-    return { youOwe: 0, youAreOwed: 0 };
+    const res = await axios.get("/api/settlements/me/balances");
+    return res.data;
   },
 };
 
