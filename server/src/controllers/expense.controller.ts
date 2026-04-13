@@ -20,3 +20,8 @@ export const deleteExpense = async (req: AuthRequest, res: Response) => {
     res.status(403).json({ error: error.message });
   }
 };
+
+export const getMyExpenses = async (req: AuthRequest, res: Response) => {
+  const expenses = await ExpenseService.getMyExpenses(req.user!.userId);
+  res.json(expenses);
+};
