@@ -66,4 +66,25 @@ export class ExpenseService {
     await prisma.expense.delete({ where: { id: expenseId } });
     return true;
   }
+
+  static async getMyExpenses(userId: string) {
+    return prisma.expense.findMany({
+      where: {
+        OR: [
+          { paidBy: userId },
+          { splits: { some: { userId } } }
+        ]
+      },
+      include: {
+        group: { select: { id: true, name: true } },
+        splits: {
+          include: {
+            user: { select: { id: true, username: true, avatarUrl: true } }
+          }
+        },
+        payer: { select: { id: true, username: true, avatarUrl: true } }
+      },
+      orderBy: { date: 'desc' }
+    });
+  }
 }
