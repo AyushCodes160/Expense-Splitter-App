@@ -144,8 +144,8 @@ export const ExpenseService = {
   },
 
   async listMine(): Promise<Expense[]> {
-    // For simplicity, just return empty list or build this route in backend
-    return [];
+    const res = await axios.get("/api/expenses/me");
+    return res.data;
   },
 
   async add(input: AddExpenseInput): Promise<Expense> {
@@ -177,6 +177,11 @@ export const BalanceService = {
 };
 
 export const SettlementService = {
+  async listMine(): Promise<any[]> {
+    const res = await axios.get("/api/settlements/me");
+    return res.data;
+  },
+
   async record(groupId: string, payeeId: string, amount: number) {
     const res = await axios.post("/api/settlements/pay", { groupId, payeeId, amount });
     return res.data;
