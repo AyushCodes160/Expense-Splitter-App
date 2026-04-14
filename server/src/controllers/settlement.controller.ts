@@ -26,3 +26,8 @@ export const getMyTotals = async (req: AuthRequest, res: Response) => {
   const totals = await SettlementService.getMyTotals(req.user!.userId);
   res.json(totals);
 };
+
+export const getMySettlements = async (req: AuthRequest, res: Response) => {
+  const settlements = await SettlementService.getMySettlements(req.user!.userId);
+  res.json(settlements);
+};
