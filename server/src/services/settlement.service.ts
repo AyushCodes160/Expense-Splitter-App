@@ -90,4 +90,21 @@ export class SettlementService {
       youAreOwed: Math.round(youAreOwed * 100) / 100
     };
   }
+
+  static async getMySettlements(userId: string) {
+    return prisma.settlement.findMany({
+      where: {
+        OR: [
+          { payerId: userId },
+          { payeeId: userId }
+        ]
+      },
+      include: {
+        group: { select: { id: true, name: true } },
+        payer: { select: { id: true, username: true, avatarUrl: true } },
+        payee: { select: { id: true, username: true, avatarUrl: true } }
+      },
+      orderBy: { date: 'desc' }
+    });
+  }
 }
