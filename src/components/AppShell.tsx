@@ -1,5 +1,5 @@
-import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
-import { Wallet, LayoutDashboard, Users, User, LogOut } from "lucide-react";
+import { Link, useNavigate, useRouterState, Navigate } from "@tanstack/react-router";
+import { Wallet, LayoutDashboard, Users, User, LogOut, Activity as ActivityIcon } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 
@@ -17,17 +17,17 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   }
 
   if (!user) {
-    // redirect to login
     if (typeof window !== "undefined") {
-      navigate({ to: "/login" });
+      return <Navigate to="/login" />;
     }
     return null;
   }
 
   const navItems = [
     { to: "/dashboard", label: "Dashboard", icon: LayoutDashboard },
+    { to: "/activity", label: "Activity", icon: ActivityIcon },
     { to: "/groups", label: "Groups", icon: Users },
-    { to: "/friends", label: "Friends", icon: User },
+    { to: "/friends", label: "Friends", icon: Users },
     { to: "/profile", label: "Profile", icon: User },
   ] as const;
 
