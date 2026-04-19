@@ -2,6 +2,7 @@ import { Link, useNavigate, useRouterState, Navigate } from "@tanstack/react-rou
 import { Wallet, LayoutDashboard, Users, User, LogOut, Activity as ActivityIcon } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
+import { AnimatedBlobs } from "@/components/AnimatedBlobs";
 
 export function AppShell({ children }: { children: React.ReactNode }) {
   const { user, signOut, loading } = useAuth();
@@ -33,6 +34,8 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="min-h-screen relative">
+      <AnimatedBlobs />
+      <div className="fixed inset-0 z-0 grid-overlay pointer-events-none" />
       <header className="fixed top-6 left-1/2 -translate-x-1/2 z-50 w-[92%] max-w-5xl rounded-full glass-strong shadow-elegant transition-all duration-300">
         <div className="flex h-14 items-center justify-between px-4 sm:px-6">
           <Link to="/dashboard" id="brand-link" className="flex items-center gap-2">
