@@ -24,6 +24,16 @@ app.use('/api/groups', groupRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/settlements', settlementRoutes);
 
+// Serve Static Frontend (Vite Build)
+import path from 'path';
+app.use(express.static(path.join(__dirname, '../../dist')));
+
+// SPA Catch-all (for TanStack Router)
+app.get('*', (req, res, next) => {
+  if (req.path.startsWith('/api/')) return next();
+  res.sendFile(path.join(__dirname, '../../dist/index.html'));
+});
+
 // Global Error Handler
 app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
   console.error(err);
