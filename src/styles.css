@@ -42,35 +42,35 @@
   --font-sans: "Inter", system-ui, sans-serif;
 }
 
-/* Dark-first design — premium glassmorphism with teal-purple gradient accent */
+/* Dark-first Neo-SaaS design — Deep Navy & Electric Blue */
 :root {
-  --radius: 0.75rem;
+  --radius: 1.5rem;
 
-  /* Deep charcoal background system */
-  --background: oklch(0.14 0.025 270);
-  --foreground: oklch(0.97 0.005 240);
+  /* Deep Navy background system */
+  --background: oklch(0.16 0.015 260);
+  --foreground: oklch(0.98 0.005 240);
 
-  --card: oklch(0.2 0.03 270 / 0.5);
-  --card-foreground: oklch(0.97 0.005 240);
+  --card: oklch(0.20 0.02 260 / 0.4);
+  --card-foreground: oklch(0.98 0.005 240);
 
-  --popover: oklch(0.18 0.03 270);
-  --popover-foreground: oklch(0.97 0.005 240);
+  --popover: oklch(0.18 0.02 260);
+  --popover-foreground: oklch(0.98 0.005 240);
 
-  /* Vibrant teal primary */
-  --primary: oklch(0.78 0.16 200);
-  --primary-foreground: oklch(0.15 0.03 270);
-  --primary-glow: oklch(0.85 0.18 195);
+  /* Electric Blue primary */
+  --primary: oklch(0.65 0.18 250);
+  --primary-foreground: oklch(0.98 0.005 240);
+  --primary-glow: oklch(0.70 0.18 250);
 
-  /* Purple accent */
-  --accent: oklch(0.6 0.22 295);
-  --accent-foreground: oklch(0.98 0.005 240);
-  --accent-glow: oklch(0.7 0.24 295);
+  /* Cyan accent */
+  --accent: oklch(0.75 0.15 220);
+  --accent-foreground: oklch(0.16 0.015 260);
+  --accent-glow: oklch(0.80 0.15 220);
 
-  --secondary: oklch(0.25 0.035 270);
+  --secondary: oklch(0.24 0.025 260);
   --secondary-foreground: oklch(0.95 0.005 240);
 
-  --muted: oklch(0.22 0.03 270);
-  --muted-foreground: oklch(0.68 0.02 260);
+  --muted: oklch(0.22 0.02 260);
+  --muted-foreground: oklch(0.70 0.015 260);
 
   --destructive: oklch(0.65 0.22 25);
   --destructive-foreground: oklch(0.98 0.005 240);
@@ -81,22 +81,22 @@
   --warning: oklch(0.8 0.17 75);
   --warning-foreground: oklch(0.15 0.03 270);
 
-  --border: oklch(1 0 0 / 0.08);
+  --border: oklch(1 0 0 / 0.06);
   --input: oklch(1 0 0 / 0.06);
-  --ring: oklch(0.78 0.16 200);
+  --ring: oklch(0.65 0.18 250);
 
   /* Gradients */
-  --gradient-primary: linear-gradient(135deg, oklch(0.78 0.16 200), oklch(0.6 0.22 295));
-  --gradient-card: linear-gradient(135deg, oklch(0.22 0.03 270 / 0.6), oklch(0.18 0.04 280 / 0.4));
-  --gradient-mesh: radial-gradient(at 20% 20%, oklch(0.6 0.22 295 / 0.15) 0%, transparent 50%),
-    radial-gradient(at 80% 0%, oklch(0.78 0.16 200 / 0.12) 0%, transparent 50%),
-    radial-gradient(at 0% 100%, oklch(0.6 0.22 295 / 0.08) 0%, transparent 50%);
+  --gradient-primary: linear-gradient(135deg, oklch(0.65 0.18 250), oklch(0.75 0.15 220));
+  --gradient-card: linear-gradient(135deg, oklch(0.24 0.025 260 / 0.5), oklch(0.18 0.02 260 / 0.3));
+  --gradient-mesh: radial-gradient(at 50% -20%, oklch(0.65 0.18 250 / 0.15) 0%, transparent 60%),
+    radial-gradient(at 0% 100%, oklch(0.75 0.15 220 / 0.08) 0%, transparent 50%),
+    radial-gradient(at 100% 100%, oklch(0.65 0.18 250 / 0.08) 0%, transparent 50%);
 
   /* Shadows */
-  --shadow-glow: 0 0 40px oklch(0.78 0.16 200 / 0.25);
-  --shadow-glow-accent: 0 0 50px oklch(0.6 0.22 295 / 0.3);
-  --shadow-elegant: 0 10px 40px -10px oklch(0 0 0 / 0.5);
-  --shadow-glass: 0 8px 32px 0 oklch(0 0 0 / 0.37);
+  --shadow-glow: 0 0 30px oklch(0.65 0.18 250 / 0.25);
+  --shadow-glow-accent: 0 0 40px oklch(0.75 0.15 220 / 0.3);
+  --shadow-elegant: 0 20px 40px -10px oklch(0 0 0 / 0.7);
+  --shadow-glass: 0 8px 32px 0 oklch(0 0 0 / 0.4);
 
   /* Transitions */
   --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -132,17 +132,17 @@
 @layer components {
   .glass {
     background: var(--gradient-card);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--border);
+    backdrop-filter: blur(32px) saturate(200%);
+    -webkit-backdrop-filter: blur(32px) saturate(200%);
+    border: 1px solid oklch(1 0 0 / 0.08);
     box-shadow: var(--shadow-glass);
   }
 
   .glass-strong {
-    background: oklch(0.2 0.03 270 / 0.7);
-    backdrop-filter: blur(24px) saturate(200%);
-    -webkit-backdrop-filter: blur(24px) saturate(200%);
-    border: 1px solid var(--border);
+    background: oklch(0.20 0.02 260 / 0.6);
+    backdrop-filter: blur(40px) saturate(220%);
+    -webkit-backdrop-filter: blur(40px) saturate(220%);
+    border: 1px solid oklch(1 0 0 / 0.1);
   }
 
   .gradient-text {
